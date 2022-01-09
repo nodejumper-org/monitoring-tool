@@ -1,0 +1,93 @@
+version: '3.8'
+
+networks:
+  monitoring:
+    driver: bridge
+    
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
+services:
+  node-exporter:
+    container_name: node_exporter
+    image: prom/node-exporter:latest
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    expose:
+      - 9100
+    networks:
+      - monitoring
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    volumes:
+      - prometheus_data:/etc/prometheus
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/alert_rules.yml:/etc/prometheus/alert_rules.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    ports:
+      - 9090:9090
+    networks:
+      - monitoring
+
+  alertmanager:
+    container_name: alert_manager
+    image: prom/alertmanager:latest
+    restart: unless-stopped
+    ports:
+      - 9093:9093
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+    networks:
+      - monitoring
+
+  alertmanager-bot:
+    container_name: alert_manager_bot
+    image: metalmatze/alertmanager-bot:latest
+    environment:
+      - ALERTMANAGER_URL=http://alert_manager:9093
+      - LISTEN_ADDR=0.0.0.0:8080
+      - BOLT_PATH=/data/bot.db
+      - STORE=bolt
+      - TELEGRAM_ADMIN=1111111 # your telegram conversation id
+      - TELEGRAM_TOKEN=11111111:AAG_XXXXXXX # your telegram bot token
+      - TEMPLATE_PATHS=/templates/default.tmpl
+    volumes:
+      - ./alertmanager-bot:/data
+    ports:
+      - 8080:8080
+    networks:
+      - monitoring
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    ports:
+      - 80:3000
+    depends_on:
+      - prometheus
+    networks:
+      - monitoring

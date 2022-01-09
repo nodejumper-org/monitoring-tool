@@ -1,0 +1,12 @@
+route:
+  group_wait: 20s
+  group_interval: 20s
+  repeat_interval: 60s
+  group_by: ['alertname', 'cluster', 'service']
+  receiver: alertmanager-bot
+
+receivers:
+- name: alertmanager-bot
+  webhook_configs:
+  - send_resolved: true
+    url: 'http://alert_manager_bot:8080'
