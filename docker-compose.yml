@@ -85,10 +85,9 @@ services:
     restart: unless-stopped
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./grafana/provisioning:/etc/grafana/provisioning
-      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana:/etc/grafana/provisioning
     ports:
-      - 80:3000
+      - 3000:3000
     networks:
       - monitoring
     depends_on:
