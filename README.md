@@ -1,6 +1,6 @@
 # monitoring-tool
 
-> Server hardware and validotor nodes monitoring tool with alert via telegram bot
+> Server hardware and validotor nodes monitoring tool with alerts via telegram bot
 
 ## Includes:
 
