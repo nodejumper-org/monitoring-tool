@@ -34,7 +34,7 @@ cd monitoring-tool
 sudo docker-compose up -d
 ```
 
-4. Open in browser https://<your_server_ip>:3000
+4. Open in browser https://<your_server_ip>:3000 <br>
 default credentials: admin\admin
 
 ## Configure
