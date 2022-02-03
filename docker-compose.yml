@@ -50,31 +50,32 @@ services:
     container_name: alert_manager
     image: prom/alertmanager:latest
     restart: unless-stopped
-    ports:
-      - 9093:9093
     volumes:
       - ./alertmanager/:/etc/alertmanager/
     command:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
+    expose:
+      - 9093
     networks:
       - monitoring
 
   alertmanager-bot:
     container_name: alert_manager_bot
     image: metalmatze/alertmanager-bot:latest
+    restart: unless-stopped
     environment:
       - ALERTMANAGER_URL=http://alert_manager:9093
       - LISTEN_ADDR=0.0.0.0:8080
       - BOLT_PATH=/data/bot.db
       - STORE=bolt
-      - TELEGRAM_ADMIN=1111111 # your telegram conversation id
+      - TELEGRAM_ADMIN=1111111              # your telegram user id
       - TELEGRAM_TOKEN=11111111:AAG_XXXXXXX # your telegram bot token
       - TEMPLATE_PATHS=/templates/default.tmpl
     volumes:
       - ./alertmanager-bot:/data
-    ports:
-      - 8080:8080
+    expose:
+      - 8080
     networks:
       - monitoring
 
@@ -87,7 +88,7 @@ services:
       - ./grafana/provisioning/:/etc/grafana/provisioning/
     ports:
       - 80:3000
-    depends_on:
-      - prometheus
     networks:
       - monitoring
+    depends_on:
+      - prometheus
