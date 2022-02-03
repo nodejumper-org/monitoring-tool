@@ -2,16 +2,16 @@
 
 > Server hardware and validotor nodes monitoring tool with alerts via telegram bot
 
-## Includes:
+## Includes
 
-#### Containers:
+#### Containers
 - [grafana sever](https://hub.docker.com/r/grafana/grafana)
 - [node_exporter](https://hub.docker.com/r/prom/node-exporter)
 - [prometheus](https://hub.docker.com/r/prom/prometheus)
 - [alertmanager](https://hub.docker.com/r/prom/alertmanager)
 - [alertmanager_bot (telegram)](https://hub.docker.com/r/metalmatze/alertmanager-bot)
 
-#### Dashboards:
+#### Dashboards
  - [Node Exporter Full dashboard](https://github.com/rfrail3/grafana-dashboards)
  - [Cyberomanov dashboard](https://github.com/cyberomanov/grafana)
 
