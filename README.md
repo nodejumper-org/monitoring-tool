@@ -12,8 +12,13 @@
 - [alertmanager_bot (telegram)](https://hub.docker.com/r/metalmatze/alertmanager-bot)
 
 #### Dashboards
- - [Node Exporter Full dashboard](https://github.com/rfrail3/grafana-dashboards)
- - [Cyberomanov dashboard](https://github.com/cyberomanov/grafana)
+- [Node Exporter Full dashboard](https://github.com/rfrail3/grafana-dashboards)
+- [Cyberomanov dashboard](https://github.com/cyberomanov/grafana)
+
+#### Alerts
+- Server down
+- Out of memory (<10%)
+- Out of disk space (<10%)
 
 ## How to run
 
