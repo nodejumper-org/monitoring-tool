@@ -6,7 +6,7 @@ groups:
     expr: up == 0
     for: 1m
     labels:
-      severity: Error
+      severity: major
     annotations:
       summary: "Sever is down. Instance: {{ $labels.label }}; host: {{ $labels.instance }}" 
       description: "Server is down"
@@ -33,8 +33,7 @@ groups:
       expr: predict_linear(node_filesystem_files_free{fstype!~"rootfs|nfs4|tmpfs"}[4h], 24 * 3600) < 0
       for: 5m
       labels:
-        severity: major
-        service: node_exporter
+        severity: warning
       annotations:
         description: "Filesystem {{ $labels.mountpoint }} on {{ $labels.instance }} will be out within 24 hours."
 
@@ -42,7 +41,6 @@ groups:
       expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 85
       for: 0m
       labels:
-        severity: major
-        service: node_exporter
+        severity: warning
       annotations:
         description: "CPU load is > 85%\n Instance: {{ $labels.label }}; host: {{ $labels.instance }}"
