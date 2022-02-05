@@ -2,7 +2,16 @@ groups:
 - name: Cosmos Alerts  
   rules:
 
-  - alert: ValidatorNodeDegradedSyncing
+  - alert: ValidatorMissingBlocks
+    expr: rate(tendermint_consensus_validator_missed_blocks[1m]) != 0
+    # for: 1m
+    labels:
+      severity: major
+    annotations:
+      title: "Missing Blocks: {{ $labels.label }}"
+      description: "{{ $labels.instance }} missed some blocks"
+
+  - alert: ValidatorDegradedSyncing
     expr: increase(tendermint_consensus_latest_block_height[5m]) < 40
     for: 5m
     labels:
@@ -10,7 +19,7 @@ groups:
     annotations:
       description: "Degraded syncing performance - Instance {{ $labels.label }}; host: {{ $labels.instance }}"
 
-  - alert: TooFewPeers
+  - alert: ValidatorTooFewPeers
     expr: tendermint_p2p_peers < 5
     for: 5m
     labels:
