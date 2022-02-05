@@ -1,0 +1,19 @@
+groups:
+- name: Cosmos Alerts  
+  rules:
+
+  - alert: ValidatorNodeDegradedSyncing
+    expr: increase(tendermint_consensus_latest_block_height[5m]) < 40
+    for: 5m
+    labels:
+      severity: major
+    annotations:
+      description: "Degraded syncing performance - Instance {{ $labels.label }}; host: {{ $labels.instance }}"
+
+  - alert: TooFewPeers
+    expr: tendermint_p2p_peers < 5
+    for: 5m
+    labels:
+      severity: major
+    annotations:
+      description: 'P2P Peers on {{ $labels.label }}; host: {{ $labels.instance }} is lower than threshold (5)'
