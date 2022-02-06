@@ -34,7 +34,8 @@ services:
     volumes:
       - prometheus_data:/etc/prometheus
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./prometheus/alert_rules.yml:/etc/prometheus/alert_rules.yml
+      - ./prometheus/server_alerts.yml:/etc/prometheus/server_alerts.yml
+      - ./prometheus/cosmos_alerts.yml:/etc/prometheus/cosmos_alerts.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
