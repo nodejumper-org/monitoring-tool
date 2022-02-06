@@ -14,11 +14,20 @@
 #### Dashboards
 - [Node Exporter Full dashboard](https://github.com/rfrail3/grafana-dashboards)
 - [Cyberomanov dashboard](https://github.com/cyberomanov/grafana)
+- Cosmos-based Chain Validator Dashboard
 
 #### Alerts
+> Server
 - Server down
 - Out of memory (<10%)
 - Out of disk space (<10%)
+- Out of disk space within 24h
+- High CPU load (>85%)
+
+> Cosmos-based validator
+- Missing blocks
+- Degraded syncing
+- Low peers count (<5)
 
 ## How to run
 
@@ -52,11 +61,13 @@ TELEGRAM_TOKEN=11111111:AAG_XXXXXXX # your telegram bot token
 
 Add other servers (in <b>prometheus/prometheus.yml</b>)
 ```
-    - targets: ["172.0.0.0:1234"]
+    # for node_exporter
+    - targets: ["172.0.0.0:9100"]
       labels:
         label: "server1"
-        
-    - targets: ["192.0.0.0:2222"]
+    
+    # for cosmos-based validator node with prometheus enabled
+    - targets: ["192.0.0.0:26660"]
       labels:
         label: "server2"
 ```
