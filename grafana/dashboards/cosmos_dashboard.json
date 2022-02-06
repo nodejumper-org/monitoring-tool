@@ -24,7 +24,7 @@
   "gnetId": 11036,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1644144029035,
+  "iteration": 1644166184385,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -42,10 +42,6 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "$DS"
-      },
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -237,10 +233,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "$DS"
-      },
       "fieldConfig": {
         "defaults": {
           "decimals": 0,
@@ -303,9 +295,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "uid": "$DS"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -363,6 +352,10 @@
       "pluginVersion": "8.3.0",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ehJx8vpnz"
+          },
           "expr": "tendermint_p2p_peers{chain_id=\"$chain_id\", instance=~\"$instance\"}",
           "format": "time_series",
           "instant": false,
@@ -375,10 +368,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "$DS"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -445,10 +434,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "$DS"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -512,9 +497,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "uid": "$DS"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -572,6 +554,10 @@
       "pluginVersion": "8.3.0",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ehJx8vpnz"
+          },
           "expr": "tendermint_mempool_size{chain_id=\"$chain_id\", instance=~\"$instance\"}",
           "format": "time_series",
           "instant": false,
@@ -584,10 +570,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "$DS"
-      },
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -1694,7 +1676,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "sifchain-1",
           "value": "sifchain-1"
         },
@@ -1755,6 +1737,7 @@
     "refresh_intervals": [
       "5s",
       "10s",
+      "15s",
       "30s",
       "1m",
       "5m",
@@ -1779,6 +1762,6 @@
   "timezone": "",
   "title": "Cosmos-based Chains Dashboard",
   "uid": "UJyurCTWz",
-  "version": 11,
+  "version": 12,
   "weekStart": ""
 }
