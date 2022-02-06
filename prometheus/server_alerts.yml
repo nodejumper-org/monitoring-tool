@@ -30,17 +30,17 @@ groups:
       description: "Disk is almost full (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
   - alert: HostOutOfDiskSpaceWithin24H
-      expr: predict_linear(node_filesystem_files_free{fstype!~"rootfs|nfs4|tmpfs"}[4h], 24 * 3600) < 0
-      for: 5m
-      labels:
-        severity: warning
-      annotations:
-        description: "Filesystem {{ $labels.mountpoint }} on {{ $labels.instance }} will be out within 24 hours."
+    expr: predict_linear(node_filesystem_files_free{fstype!~"rootfs|nfs4|tmpfs"}[4h], 24 * 3600) < 0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      description: "Filesystem {{ $labels.mountpoint }} on {{ $labels.instance }} will be out within 24 hours."
 
   - alert: HostHighCPULoad
-      expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 85
-      for: 0m
-      labels:
-        severity: warning
-      annotations:
-        description: "CPU load is > 85%\n Instance: {{ $labels.label }}; host: {{ $labels.instance }}"
+    expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 85
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      description: "CPU load is > 85%\n Instance: {{ $labels.label }}; host: {{ $labels.instance }}"
