@@ -13,7 +13,7 @@
 
 #### Dashboards
 - [Node Exporter Full dashboard](https://github.com/rfrail3/grafana-dashboards)
-- [Cyberomanov dashboard](https://github.com/cyberomanov/grafana)
+- [Node Exporter for Prometheus Dashboard EN 20201010](https://grafana.com/grafana/dashboards/11074)
 - Cosmos-based Chain Validator Dashboard
 
 #### Alerts
@@ -61,13 +61,26 @@ TELEGRAM_TOKEN=11111111:AAG_XXXXXXX # your telegram bot token
 
 Add other servers (in <b>prometheus/prometheus.yml</b>)
 ```
-    # for node_exporter
-    - targets: ["172.0.0.0:9100"]
+  # for node_exporter
+  - job_name: "servers"
+    static_configs:
+    - targets: ["172.0.0.1:9100"]
       labels:
-        label: "server1"
+        instance: "server1"
+    - targets: ["172.0.0.2:9100"]
+      labels:
+        instance: "server2"
     
-    # for cosmos-based validator node with prometheus enabled
-    - targets: ["192.0.0.0:26660"]
+  # for cosmos-based validator node with node_exporter installed and prometheus enabled
+  - job_name: "cosmos-validator"
+    static_configs:
+    - targets: ["192.0.0.1:9100","192.0.0.1:26660"]
       labels:
-        label: "server2"
+        instance: "sentry1"
+    - targets: ["192.0.0.2:9100","192.0.0.2:26660"]
+      labels:
+        instance: "sentry2"
+    - targets: ["192.0.0.3:9100","192.0.0.3:26660"]
+      labels:
+        instance: "validator"
 ```
