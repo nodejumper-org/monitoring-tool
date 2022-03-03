@@ -1,0 +1,51 @@
+# my global config
+global:
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: ['alert_manager:9093']
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - server_alerts.yml
+  - cosmos_alerts.yml
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+
+  # self monitoring
+  - job_name: "grafana-server"
+    static_configs:
+    - targets: ["node-exporter:9100"]
+      labels:
+        instance: "grafana-server"
+
+  # for node_exporter
+  - job_name: "servers"
+    static_configs:
+    - targets: ["172.0.0.1:9100"]
+      labels:
+        instance: "server1"
+    - targets: ["172.0.0.2:9100"]
+      labels:
+        instance: "server2"
+    
+  # for cosmos-based validator node with node_exporter installed and prometheus enabled
+  - job_name: "cosmos-validator"
+    static_configs:
+    - targets: ["192.0.0.1:9100","192.0.0.1:26660"]
+      labels:
+        instance: "sentry1"
+    - targets: ["192.0.0.2:9100","192.0.0.2:26660"]
+      labels:
+        instance: "sentry2"
+    - targets: ["192.0.0.3:9100","192.0.0.3:26660"]
+      labels:
+        instance: "validator"
