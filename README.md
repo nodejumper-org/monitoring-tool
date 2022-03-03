@@ -50,7 +50,6 @@ cp prometheus/prometheus.yml.example prometheus/prometheus.yml
 
 4. Start containers
 ```
-cd monitoring-tool
 sudo docker-compose up -d
 ```
 
