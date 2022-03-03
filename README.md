@@ -42,7 +42,13 @@ cd ~
 git clone https://github.com/vbloher/monitoring-tool.git 
 ```
 
-3. Start containers
+3. Create configuration file from example
+```
+cd monitoring-tool
+cp prometheus/prometheus.yml.example prometheus/prometheus.yml
+```
+
+4. Start containers
 ```
 cd monitoring-tool
 sudo docker-compose up -d
