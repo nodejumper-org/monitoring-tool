@@ -32,7 +32,7 @@ services:
     image: prom/prometheus:latest
     restart: unless-stopped
     volumes:
-      - prometheus_data:/etc/prometheus
+      - prometheus_data:/prometheus
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./prometheus/server_alerts.yml:/etc/prometheus/server_alerts.yml
       - ./prometheus/cosmos_alerts.yml:/etc/prometheus/cosmos_alerts.yml
