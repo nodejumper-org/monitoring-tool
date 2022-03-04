@@ -4675,7 +4675,7 @@
             "value": "30m"
           }
         ],
-        "query": "15s,30s,1m,2m,3m,5m,10m,30m",
+        "query": "30s,1m,2m,3m,5m,10m,30m",
         "queryValue": "",
         "refresh": 2,
         "skipUrlSync": false,
