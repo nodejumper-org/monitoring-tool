@@ -13,7 +13,7 @@
 
 #### Dashboards
 - [Node Exporter Full dashboard](https://github.com/rfrail3/grafana-dashboards)
-- [Node Exporter for Prometheus Dashboard EN 20201010](https://github.com/starsliao/Prometheus/tree/master/node_exporter)
+- [Cyberomanov dashboard](https://github.com/cyberomanov/grafana)
 - Cosmos-based Chain Validator Dashboard (my own dashboard)
 
 #### Alerts
