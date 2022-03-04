@@ -24,8 +24,8 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 11074,
   "graphTooltip": 0,
-  "id": 5,
-  "iteration": 1646389606843,
+  "id": 7,
+  "iteration": 1646407254261,
   "links": [
     {
       "$$hashKey": "object:2300",
@@ -4534,7 +4534,7 @@
           "uid": "PBFA97CFB590B2093"
         },
         "definition": "label_values(node_uname_info{origin_prometheus=~\"$origin_prometheus\",job=~\"$job\"}, label)",
-        "hide": 0,
+        "hide": 2,
         "includeAll": false,
         "label": "Node",
         "multi": false,
@@ -4557,15 +4557,15 @@
         "allFormat": "glob",
         "current": {
           "selected": false,
-          "text": "bitcanna-validator",
-          "value": "bitcanna-validator"
+          "text": "another-1-libra-validator",
+          "value": "another-1-libra-validator"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "PBFA97CFB590B2093"
         },
         "definition": "label_values(node_uname_info{origin_prometheus=~\"$origin_prometheus\",job=~\"$job\"},instance)",
-        "hide": 1,
+        "hide": 0,
         "includeAll": false,
         "label": "Instance",
         "multi": false,
@@ -4588,7 +4588,7 @@
       {
         "allFormat": "glob",
         "current": {
-          "selected": false,
+          "selected": true,
           "text": [
             "All"
           ],
@@ -4675,7 +4675,7 @@
             "value": "30m"
           }
         ],
-        "query": "30s,1m,2m,3m,5m,10m,30m",
+        "query": "15s,30s,1m,2m,3m,5m,10m,30m",
         "queryValue": "",
         "refresh": 2,
         "skipUrlSync": false,
@@ -4745,8 +4745,8 @@
       {
         "current": {
           "selected": false,
-          "text": "8",
-          "value": "8"
+          "text": "16",
+          "value": "16"
         },
         "datasource": {
           "type": "prometheus",
@@ -4802,8 +4802,8 @@
     ]
   },
   "timezone": "browser",
-  "title": "cyberomanov /// how_to_node [ ORIGINAL ] (improved by vbloher)",
-  "uid": "cybergrafanaorig",
-  "version": 2,
+  "title": "cyberomanov /// how_to_node [ ORIGINAL ] (improved by vbloher)222",
+  "uid": "22cybergrafanaorig22",
+  "version": 1,
   "weekStart": ""
 }
