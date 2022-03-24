@@ -84,7 +84,7 @@ services:
     container_name: grafana
     image: grafana/grafana:latest
     restart: unless-stopped
-    environment:
+#    environment:
 #      - GF_SERVER_PROTOCOL=https
 #      - GF_SERVER_CERT_FILE=/etc/grafana/ssl/grafana.crt
 #      - GF_SERVER_CERT_KEY=/etc/grafana/ssl/grafana.key
