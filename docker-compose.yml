@@ -86,7 +86,9 @@ services:
     restart: unless-stopped
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./grafana:/etc/grafana/provisioning
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/ssl_certs:/etc/grafana/ssl_certs
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     ports:
       - 3000:3000
     networks:
