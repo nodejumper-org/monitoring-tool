@@ -42,8 +42,8 @@ services:
       - '--web.console.libraries=/etc/prometheus/console_libraries'
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--web.enable-lifecycle'
-    ports:
-      - 9090:9090
+    expose:
+      - 9090
     networks:
       - monitoring
 
@@ -90,7 +90,7 @@ services:
       - ./grafana/ssl_certs:/etc/grafana/ssl_certs
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     ports:
-      - 3000:3000
+      - 80:3000
     networks:
       - monitoring
     depends_on:
