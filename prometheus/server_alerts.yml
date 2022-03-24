@@ -8,7 +8,7 @@ groups:
     labels:
       severity: major
     annotations:
-      summary: "Sever is down. Instance: {{ $labels.instance }}; host: {{ $labels.host }}" 
+      summary: "Sever is down. Instance: {{ $labels.instance }}; host: {{ $labels.nodename }}" 
       description: "Server is down"
 
   - alert: HostOutOfMemory
@@ -17,7 +17,7 @@ groups:
     labels:
       severity: warning
     annotations:
-      summary: "Host out of memor. Instance: {{ $labels.instance }}; host: {{ $labels.host }}"
+      summary: "Host out of memor. Instance: {{ $labels.instance }}; host: {{ $labels.nodename }}"
       description: "Host memory is filling up (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
   - alert: HostOutOfDiskSpace
@@ -26,7 +26,7 @@ groups:
     labels:
       severity: warning
     annotations:
-      summary: "Host out of disk space. Instance: {{ $labels.instance }}; host: {{ $labels.host }}"
+      summary: "Host out of disk space. Instance: {{ $labels.instance }}; host: {{ $labels.nodename }}"
       description: "Disk is almost full (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
   - alert: HostOutOfDiskSpaceWithin24H
@@ -35,7 +35,8 @@ groups:
     labels:
       severity: warning
     annotations:
-      description: "Filesystem {{ $labels.mountpoint }} on {{ $labels.instance }} (host: {{ $labels.host }}) will be out within 24 hours."
+      summary: "Disk space fills up. Instance: {{ $labels.instance }}; host: {{ $labels.nodename }}"
+      description: "Filesystem {{ $labels.mountpoint }} will be out within 24 hours."
 
   - alert: HostHighCPULoad
     expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) > 85
@@ -43,4 +44,5 @@ groups:
     labels:
       severity: warning
     annotations:
-      description: "CPU load is > 85%\n Instance: {{ $labels.instance }}; host: {{ $labels.host }}"
+      summary: "High CPU load. Instance: {{ $labels.instance }}; host: {{ $labels.nodename }}"
+      description: "CPU load is > 85%"
