@@ -91,7 +91,7 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
-      - ./grafana/ssl_certs:/etc/grafana/ssl_certs
+      - ./grafana/ssl:/etc/grafana/ssl
     ports:
       - 80:3000
     networks:
