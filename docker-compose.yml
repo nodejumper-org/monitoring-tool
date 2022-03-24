@@ -86,8 +86,8 @@ services:
     restart: unless-stopped
 #    environment:
 #      - GF_SERVER_PROTOCOL=https
-#      - GF_SERVER_CERT_FILE=/etc/grafana/ssl/grafana.crt
-#      - GF_SERVER_CERT_KEY=/etc/grafana/ssl/grafana.key
+#      - GF_SERVER_CERT_FILE=/etc/grafana/ssl/fullchain.pem
+#      - GF_SERVER_CERT_KEY=/etc/grafana/ssl/privkey.pem
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
