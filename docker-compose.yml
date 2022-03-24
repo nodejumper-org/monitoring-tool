@@ -84,11 +84,14 @@ services:
     container_name: grafana
     image: grafana/grafana:latest
     restart: unless-stopped
+    environment:
+#      - GF_SERVER_PROTOCOL=https
+#      - GF_SERVER_CERT_FILE=/etc/grafana/ssl/grafana.crt
+#      - GF_SERVER_CERT_KEY=/etc/grafana/ssl/grafana.key
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/ssl_certs:/etc/grafana/ssl_certs
-      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     ports:
       - 80:3000
     networks:
