@@ -1,3 +1,4 @@
 .DS_Store
 /prometheus/prometheus.yml
 /alertmanager-bot/bot.db
+docker-compose.yml
