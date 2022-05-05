@@ -4,11 +4,10 @@ groups:
 
   - alert: ValidatorMissingBlocks
     expr: rate(tendermint_consensus_validator_missed_blocks[1m]) != 0
-    # for: 1m
     labels:
       severity: major
     annotations:
-      title: "Missing Blocks: {{ $labels.label }}"
+      summary: "Missing Blocks"
       description: "{{ $labels.instance }} missed some blocks"
 
   - alert: ValidatorDegradedSyncing
@@ -17,6 +16,7 @@ groups:
     labels:
       severity: major
     annotations:
+      summary: "Degraded syncing performance"
       description: "Degraded syncing performance - Instance {{ $labels.label }}; host: {{ $labels.instance }}"
 
   - alert: ValidatorTooFewPeers
@@ -25,4 +25,5 @@ groups:
     labels:
       severity: major
     annotations:
+      summary: "Low number of peers"
       description: 'P2P Peers on {{ $labels.label }}; host: {{ $labels.instance }} is lower than threshold (5)'
