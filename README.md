@@ -42,9 +42,10 @@ cd ~
 git clone https://github.com/vbloher/monitoring-tool.git 
 ```
 
-3. Create configuration file from example
+3. Create configuration files from examples
 ```
 cd monitoring-tool
+cp docker-compose.yml.example docker-compose.yml
 cp prometheus/prometheus.yml.example prometheus/prometheus.yml
 ```
 
@@ -53,7 +54,7 @@ cp prometheus/prometheus.yml.example prometheus/prometheus.yml
 sudo docker-compose up -d
 ```
 
-4. Open in browser https://<your_server_ip>:3000 <br>
+4. Open in browser http://<your_server_ip> <br>
 default credentials: admin\admin
 
 ## Configure
