@@ -16,9 +16,10 @@ sudo certbot certonly --standalone
 
 Copy certs to grafana ssl dir. Replace YOUR-DOMAIN-NAME with correct one
 ```
-sudo cp /etc/letsencrypt/live/YOUR-DOMAIN-NAME/fullchain.pem ~/monitoring-tool/grafana/ssl/
-sudo cp /etc/letsencrypt/live/YOUR-DOMAIN-NAME/privkey.pem ~/monitoring-tool/grafana/ssl/
-sudo chown 472:0 ~/monitoring-tool/grafana/ssl/*.pem
+DOMAIN=YOUR-DOMAIN-NAME
+sudo cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem /opt/ssl/
+sudo cp /etc/letsencrypt/live/$DOMAIN/privkey.pem /opt/ssl/
+sudo chown 472:0 /opt/ssl/*.pem
 ```
 
 Uncomment this part of docker-compose grafana service
