@@ -4,6 +4,7 @@ groups:
 
   - alert: ValidatorMissingBlocks
     expr: rate(tendermint_consensus_validator_missed_blocks[1m]) != 0
+    for: 1m
     labels:
       severity: major
     annotations:
