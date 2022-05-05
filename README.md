@@ -46,6 +46,7 @@ git clone https://github.com/vbloher/monitoring-tool.git
 cd monitoring-tool
 cp docker-compose.yml.example docker-compose.yml
 cp prometheus/prometheus.yml.example prometheus/prometheus.yml
+cp alertmanager/config.yml.example alertmanager/config.yml
 ```
 
 4. Start containers
