@@ -70,8 +70,8 @@ services:
       - LISTEN_ADDR=0.0.0.0:8080
       - BOLT_PATH=/data/bot.db
       - STORE=bolt
-      - TELEGRAM_ADMIN=1111111              # your telegram user id
-      - TELEGRAM_TOKEN=11111111:AAG_XXXXXXX # your telegram bot token
+#      - TELEGRAM_ADMIN=1111111              # your telegram user id
+#      - TELEGRAM_TOKEN=11111111:AAG_XXXXXXX # your telegram bot token
       - TEMPLATE_PATHS=/templates/default.tmpl
     volumes:
       - ./alertmanager-bot:/data
@@ -91,7 +91,7 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
-      - ./grafana/ssl:/etc/grafana/ssl
+#      - /opt/ssl:/etc/grafana/ssl
     ports:
       - 80:3000
     networks:
