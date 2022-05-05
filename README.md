@@ -1,6 +1,6 @@
 # monitoring-tool
 
-> Server hardware and validotor nodes monitoring tool with alerts via telegram bot
+> Server hardware and validator nodes monitoring tool with alerts via telegram bot
 
 ## Includes
 
@@ -9,7 +9,6 @@
 - [node_exporter](https://hub.docker.com/r/prom/node-exporter)
 - [prometheus](https://hub.docker.com/r/prom/prometheus)
 - [alertmanager](https://hub.docker.com/r/prom/alertmanager)
-- [alertmanager_bot (telegram)](https://hub.docker.com/r/metalmatze/alertmanager-bot)
 
 #### Dashboards
 - [Node Exporter Full dashboard](https://github.com/rfrail3/grafana-dashboards)
@@ -59,10 +58,10 @@ default credentials: admin\admin
 
 ## Configure
 
-Telegram bot notifications (in <b>docker-compose.yml</b>)
+Telegram bot notifications (in <b>alertmanager/config.yml</b>)
 ```
-TELEGRAM_ADMIN=1111111              # your telegram user id
-TELEGRAM_TOKEN=11111111:AAG_XXXXXXX # your telegram bot token
+chat_id=1111111                 # your telegram user id
+bot_token=11111111:AAG_XXXXXXX  # your telegram bot token
 ```
 
 Add other servers (in <b>prometheus/prometheus.yml</b>)

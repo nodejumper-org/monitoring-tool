@@ -1,12 +1,18 @@
 route:
   group_wait: 20s
   group_interval: 20s
-  repeat_interval: 60s
+  repeat_interval: 5m
   group_by: ['alertname', 'cluster', 'service']
-  receiver: alertmanager-bot
+  receiver: telegram
+
+templates:
+  - "/etc/alertmanager/templates/*.tmpl"
 
 receivers:
-- name: alertmanager-bot
-  webhook_configs:
-  - send_resolved: true
-    url: 'http://alert_manager_bot:8080'
+  - name: telegram
+    telegram_configs:
+      - api_url: https://api.telegram.org
+        parse_mode: "HTML"
+        message: '{{ template "telegram.default" .}}'
+#        chat_id: 111111111                                 # your telegram user id
+#        bot_token: 1111111111:AAAAAAAAAAAAAAAAAAAAAAAAAA   # your telegram bot token

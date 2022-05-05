@@ -8,8 +8,7 @@ groups:
     labels:
       severity: major
     annotations:
-      summary: "Missing Blocks"
-      description: "{{ $labels.instance }} missed some blocks"
+      description: "Missing Blocks"
 
   - alert: ValidatorDegradedSyncing
     expr: increase(tendermint_consensus_latest_block_height[5m]) < 40
@@ -17,8 +16,7 @@ groups:
     labels:
       severity: major
     annotations:
-      summary: "Degraded syncing performance"
-      description: "Degraded syncing performance - Instance {{ $labels.label }}; host: {{ $labels.instance }}"
+      description: "Degraded syncing performance"
 
   - alert: ValidatorTooFewPeers
     expr: tendermint_p2p_peers < 5
@@ -26,5 +24,4 @@ groups:
     labels:
       severity: major
     annotations:
-      summary: "Low number of peers"
-      description: 'P2P Peers on {{ $labels.label }}; host: {{ $labels.instance }} is lower than threshold (5)'
+      description: "Number of peers (P2P) is lower than threshold (5)"

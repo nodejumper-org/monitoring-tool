@@ -61,25 +61,6 @@ services:
     networks:
       - monitoring
 
-  alertmanager-bot:
-    container_name: alert_manager_bot
-    image: metalmatze/alertmanager-bot:latest
-    restart: unless-stopped
-    environment:
-      - ALERTMANAGER_URL=http://alert_manager:9093
-      - LISTEN_ADDR=0.0.0.0:8080
-      - BOLT_PATH=/data/bot.db
-      - STORE=bolt
-#      - TELEGRAM_ADMIN=1111111              # your telegram user id
-#      - TELEGRAM_TOKEN=11111111:AAG_XXXXXXX # your telegram bot token
-      - TEMPLATE_PATHS=/templates/default.tmpl
-    volumes:
-      - ./alertmanager-bot:/data
-    expose:
-      - 8080
-    networks:
-      - monitoring
-
   grafana:
     container_name: grafana
     image: grafana/grafana:latest

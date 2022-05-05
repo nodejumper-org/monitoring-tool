@@ -5,8 +5,8 @@
     {{ $key }}: {{ $value }}{{ end }}{{ end }}
 <b>Annotations:</b>{{ range $key, $value := .Annotations }}
     {{ $key }}: {{ $value }}{{ end }}{{ if eq .Status "firing"}}
-<b>Duration:</b> {{ since .StartsAt }}{{ else }}
-<b>Duration:</b> {{ duration .StartsAt .EndsAt }}
-<b>Ended:</b> {{ .EndsAt | since }}{{ end }}
+<b>Started at:</b> {{ .StartsAt }}{{ else }}
+<b>Started at:</b> {{ .StartsAt }}
+<b>Ended at:</b> {{ .EndsAt }}{{ end }}
 {{ end }}
 {{ end }}
