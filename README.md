@@ -59,7 +59,7 @@ default credentials: admin\admin
 
 ## Configure
 
-Telegram bot notifications (in <b>docker-compose.yaml</b>)
+Telegram bot notifications (in <b>docker-compose.yml</b>)
 ```
 TELEGRAM_ADMIN=1111111              # your telegram user id
 TELEGRAM_TOKEN=11111111:AAG_XXXXXXX # your telegram bot token
