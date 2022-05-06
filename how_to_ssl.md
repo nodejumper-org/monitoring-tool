@@ -14,9 +14,10 @@ sudo apt install -y certbot
 sudo certbot certonly --standalone
 ```
 
-Copy certs to grafana ssl dir. Replace YOUR-DOMAIN-NAME with correct one
+Copy certs to grafana `/opt/ssl` dir. Replace YOUR-DOMAIN-NAME with correct one
 ```
 DOMAIN=YOUR-DOMAIN-NAME
+mkdir -p /opt/ssl
 sudo cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem /opt/ssl/
 sudo cp /etc/letsencrypt/live/$DOMAIN/privkey.pem /opt/ssl/
 sudo chown 472:0 /opt/ssl/*.pem
@@ -36,7 +37,7 @@ Replace ports for https
       - 433:3000
 ```
 
-Recreate grafana service using next command
+Recreate grafana docker container with new config using next command
 ```
 cd ~/monitoring-tool
 sudo docker-compose up -d
