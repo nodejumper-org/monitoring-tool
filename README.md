@@ -1,29 +1,29 @@
 # monitoring-tool
 
-> Server hardware and validator nodes monitoring tool with alerts via telegram bot
+> A powerful and easy-to-use monitoring tool for server hardware and validator nodes with alerts via telegram bot
 
 ## Includes
 
-#### Containers
+### Containers
 - [grafana sever](https://hub.docker.com/r/grafana/grafana)
 - [node_exporter](https://hub.docker.com/r/prom/node-exporter)
 - [prometheus](https://hub.docker.com/r/prom/prometheus)
 - [alertmanager](https://hub.docker.com/r/prom/alertmanager)
 
-#### Dashboards
+### Dashboards
 - [Node Exporter Full dashboard](https://github.com/rfrail3/grafana-dashboards)
 - [Node Exporter for Prometheus Dashboard EN](https://github.com/starsliao/Prometheus/tree/master/node_exporter)
 - Cosmos-based Chain Validator Dashboard (my own dashboard)
 
-#### Alerts
-> Server
+### Alerts
+#### Server alerts
 - Server down
 - Out of memory (<10%)
 - Out of disk space (<10%)
 - Out of disk space within 24h
 - High CPU load (>85%)
 
-> Cosmos-based validator
+#### Cosmos-based validator node alerts
 - Missing blocks
 - Degraded syncing
 - Low peers count (<5)
@@ -55,20 +55,14 @@ sudo docker-compose up -d
 ```
 
 4. Open in browser http://<your_server_ip> <br>
-default credentials: admin\admin
+default credentials: admin/admin
 
-## Configure
-
-Telegram bot notifications (in <b>alertmanager/config.yml</b>)
+## How to configure
+### Servers to monitor
+Add your servers with installed [node_exporter](https://github.com/prometheus/node_exporter) or installed cosmos-based node with enabled prometheus port to file <b>prometheus/prometheus.yml</b>
 ```
-chat_id=1111111                 # your telegram user id
-bot_token=11111111:AAG_XXXXXXX  # your telegram bot token
-```
-
-Add other servers (in <b>prometheus/prometheus.yml</b>)
-```
-  # for node_exporter
-  - job_name: "servers"
+  # example for servers with node_exporter installed
+  - job_name: "my-servers"
     static_configs:
     - targets: ["172.0.0.1:9100"]
       labels:
@@ -77,8 +71,8 @@ Add other servers (in <b>prometheus/prometheus.yml</b>)
       labels:
         instance: "server2"
     
-  # for cosmos-based validator node with node_exporter installed and prometheus enabled
-  - job_name: "cosmos-validator"
+  # example for servers with node_exporter and cosmos-based node installed
+  - job_name: "cosmos-validator-nodes"
     static_configs:
     - targets: ["192.0.0.1:9100","192.0.0.1:26660"]
       labels:
@@ -89,4 +83,22 @@ Add other servers (in <b>prometheus/prometheus.yml</b>)
     - targets: ["192.0.0.3:9100","192.0.0.3:26660"]
       labels:
         instance: "validator"
+```
+### Telegram notifications
+In order to enable telegram notifications, create your own bot and fill in the following fields in the file <b>alertmanager/config.yml</b>
+```
+chat_id=1111111                 # your telegram user id
+bot_token=11111111:AAG_XXXXXXX  # your telegram bot token
+```
+### SSL
+If you would like to set up SLL then use the following instruction - [how to ssl](how_to_ssl.md)
+
+## How to update
+Just run next commands 
+```
+cd monitoring-tool
+sudo docker-compose down
+git pull
+sudo docker-compose pull
+sudo docker-compose up -d
 ```
