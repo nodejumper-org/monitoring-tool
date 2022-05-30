@@ -601,41 +601,6 @@
          "type": "stat"
       },
       {
-         "alert": {
-            "alertRuleTags": {},
-            "conditions": [
-               {
-                  "evaluator": {
-                     "params": [
-                        1
-                     ],
-                     "type": "lt"
-                  },
-                  "operator": {
-                     "type": "and"
-                  },
-                  "query": {
-                     "params": [
-                        "A",
-                        "5m",
-                        "now"
-                     ]
-                  },
-                  "reducer": {
-                     "params": [],
-                     "type": "diff"
-                  },
-                  "type": "query"
-               }
-            ],
-            "executionErrorState": "alerting",
-            "for": "5m",
-            "frequency": "1m",
-            "handler": 1,
-            "name": "Block height alert",
-            "noDataState": "alerting",
-            "notifications": []
-         },
          "aliasColors": {},
          "bars": false,
          "dashLength": 10,
@@ -732,63 +697,6 @@
          }
       },
       {
-         "alert": {
-            "alertRuleTags": {},
-            "conditions": [
-               {
-                  "evaluator": {
-                     "params": [
-                        1
-                     ],
-                     "type": "lt"
-                  },
-                  "operator": {
-                     "type": "and"
-                  },
-                  "query": {
-                     "params": [
-                        "A",
-                        "5m",
-                        "now"
-                     ]
-                  },
-                  "reducer": {
-                     "params": [],
-                     "type": "avg"
-                  },
-                  "type": "query"
-               },
-               {
-                  "evaluator": {
-                     "params": [],
-                     "type": "no_value"
-                  },
-                  "operator": {
-                     "type": "or"
-                  },
-                  "query": {
-                     "params": [
-                        "A",
-                        "5m",
-                        "now"
-                     ]
-                  },
-                  "reducer": {
-                     "params": [],
-                     "type": "avg"
-                  },
-                  "type": "query"
-               }
-            ],
-            "executionErrorState": "alerting",
-            "for": "",
-            "frequency": "1m",
-            "handler": 1,
-            "message": "",
-            "name": "Current voting power alert",
-            "noDataState": "alerting",
-            "notifications": []
-         },
          "aliasColors": {},
          "bars": false,
          "dashLength": 10,
@@ -886,41 +794,6 @@
          }
       },
       {
-         "alert": {
-            "alertRuleTags": {},
-            "conditions": [
-               {
-                  "evaluator": {
-                     "params": [
-                        10
-                     ],
-                     "type": "gt"
-                  },
-                  "operator": {
-                     "type": "and"
-                  },
-                  "query": {
-                     "params": [
-                        "A",
-                        "5m",
-                        "now"
-                     ]
-                  },
-                  "reducer": {
-                     "params": [],
-                     "type": "max"
-                  },
-                  "type": "query"
-               }
-            ],
-            "executionErrorState": "alerting",
-            "for": "0m",
-            "frequency": "5m",
-            "handler": 1,
-            "name": "Last sign delay alert",
-            "noDataState": "alerting",
-            "notifications": []
-         },
          "aliasColors": {},
          "bars": false,
          "dashLength": 10,
@@ -1023,42 +896,6 @@
          }
       },
       {
-         "alert": {
-            "alertRuleTags": {},
-            "conditions": [
-               {
-                  "evaluator": {
-                     "params": [
-                        25
-                     ],
-                     "type": "gt"
-                  },
-                  "operator": {
-                     "type": "and"
-                  },
-                  "query": {
-                     "params": [
-                        "A",
-                        "5m",
-                        "now"
-                     ]
-                  },
-                  "reducer": {
-                     "params": [],
-                     "type": "max"
-                  },
-                  "type": "query"
-               }
-            ],
-            "executionErrorState": "alerting",
-            "for": "0m",
-            "frequency": "5m",
-            "handler": 1,
-            "message": "",
-            "name": "Missed signs alert",
-            "noDataState": "alerting",
-            "notifications": []
-         },
          "aliasColors": {},
          "bars": false,
          "dashLength": 10,
