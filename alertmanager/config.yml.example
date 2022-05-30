@@ -1,7 +1,7 @@
 route:
   group_wait: 20s
   group_interval: 20s
-  repeat_interval: 5m
+  repeat_interval: 1h
   group_by: ['alertname', 'cluster', 'service']
   receiver: telegram
 
