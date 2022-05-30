@@ -27,25 +27,29 @@ scrape_configs:
       labels:
         instance: "grafana-server"
 
-  # for node_exporter
-  - job_name: "servers"
-    static_configs:
-    - targets: ["172.0.0.1:9100"]
-      labels:
-        instance: "server1"
-    - targets: ["172.0.0.2:9100"]
-      labels:
-        instance: "server2"
+  #####
+  ## config examples, just remove '#'
+  #####
+
+  ## for node_exporter
+  #- job_name: "servers"
+  #  static_configs:
+  #  - targets: ["172.0.0.1:9100"]
+  #    labels:
+  #      instance: "server1"
+  #  - targets: ["172.0.0.2:9100"]
+  #    labels:
+  #      instance: "server2"
     
-  # for cosmos-based validator node with node_exporter installed and prometheus enabled
-  - job_name: "cosmos-validator"
-    static_configs:
-    - targets: ["192.0.0.1:9100","192.0.0.1:26660"]
-      labels:
-        instance: "sentry1"
-    - targets: ["192.0.0.2:9100","192.0.0.2:26660"]
-      labels:
-        instance: "sentry2"
-    - targets: ["192.0.0.3:9100","192.0.0.3:26660"]
-      labels:
-        instance: "validator"
+  ## for cosmos-based validator node with node_exporter installed and prometheus enabled
+  #- job_name: "cosmos-validator"
+  #  static_configs:
+  #  - targets: ["192.0.0.1:9100","192.0.0.1:26660"]
+  #    labels:
+  #      instance: "sentry1"
+  #  - targets: ["192.0.0.2:9100","192.0.0.2:26660"]
+  #    labels:
+  #      instance: "sentry2"
+  #  - targets: ["192.0.0.3:9100","192.0.0.3:26660"]
+  #    labels:
+  #      instance: "validator"
