@@ -25,7 +25,7 @@
 
 #### Cosmos-based validator node alerts
 - Missing blocks
-- Degraded syncing
+- Degraded syncing (sync less than 40 blocks in last 5 min)
 - Low peers count (<5)
 
 ## How to run
