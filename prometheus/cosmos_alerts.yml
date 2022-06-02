@@ -8,7 +8,7 @@ groups:
     labels:
       severity: major
     annotations:
-      description: "Validator missing blocks (>=1 in last minute)"
+      description: "Validator missing blocks (&gt;=1 in last minute)"
 
   - alert: ValidatorDegradedSyncing
     expr: increase(tendermint_consensus_latest_block_height[5m]) < 40
@@ -24,4 +24,4 @@ groups:
     labels:
       severity: major
     annotations:
-      description: "Number of peers is lower than threshold (<5)"
+      description: "Number of peers is lower than threshold (&lt;5)"
