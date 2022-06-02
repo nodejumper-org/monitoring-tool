@@ -1,5 +1,5 @@
 .DS_Store
 .idea
 /prometheus/prometheus.yml
-/alertmanager-bot/bot.db
+/alertmanager/config.yml
 docker-compose.yml
