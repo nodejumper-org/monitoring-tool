@@ -4,7 +4,7 @@ groups:
 
   - alert: HostDown
     expr: up == 0
-    for: 1m
+    for: 3m
     labels:
       severity: major
     annotations:

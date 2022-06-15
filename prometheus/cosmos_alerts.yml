@@ -3,7 +3,7 @@ groups:
   rules:
 
   - alert: ValidatorMissingBlocks
-    expr: rate(tendermint_consensus_validator_missed_blocks[1m]) != 0
+    expr: rate(tendermint_consensus_validator_missed_blocks[5m]) > 10
     for: 1m
     labels:
       severity: major
@@ -11,7 +11,7 @@ groups:
       description: "Validator missing blocks (&gt;=1 in last minute)"
 
   - alert: ValidatorDegradedSyncing
-    expr: increase(tendermint_consensus_latest_block_height[5m]) < 40
+    expr: increase(tendermint_consensus_latest_block_height[5m]) < 20
     for: 5m
     labels:
       severity: major
@@ -19,7 +19,7 @@ groups:
       description: "Degraded syncing performance (less than 40 blocks in the last 5 min)"
 
   - alert: ValidatorTooFewPeers
-    expr: tendermint_p2p_peers < 5
+    expr: tendermint_p2p_peers < 3
     for: 5m
     labels:
       severity: major
