@@ -90,6 +90,11 @@ In order to enable telegram notifications, create your own bot and fill in the f
 chat_id=1111111                 # your telegram user id
 bot_token=11111111:AAG_XXXXXXX  # your telegram bot token
 ```
+## How to install node_exporter
+Just run next command 
+```
+. <(curl https://raw.githubusercontent.com/vbloher/monitoring-tool/main/utils/install_node_exporter.sh)
+```
 ### SSL
 If you would like to set up SLL then use the following instruction - [how to ssl](how_to_ssl.md)
 
