@@ -24,4 +24,4 @@ groups:
     labels:
       severity: major
     annotations:
-      description: "Number of peers is lower than threshold (&lt;5)"
+      description: "Number of peers is lower than threshold (&lt;3)"
