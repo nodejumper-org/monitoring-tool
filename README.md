@@ -29,10 +29,15 @@
 - Low peers count (<5)
 
 ## How to run
+### Automatic installation
+```
+bash <(curl -s https://raw.githubusercontent.com/vbloher/monitoring-tool/main/utils/install.sh)
+```
 
+### Manual installation
 1. Install docker
 ```
-curl -s https://raw.githubusercontent.com/vbloher/monitoring-tool/main/utils/install_docker.sh | bash
+bash <(curl -s https://raw.githubusercontent.com/vbloher/monitoring-tool/main/utils/install_docker.sh)
 ```
 
 2. Clone the repo
@@ -51,7 +56,7 @@ cp alertmanager/config.yml.example alertmanager/config.yml
 
 4. Start containers
 ```
-sudo docker-compose up -d
+sudo docker compose up -d
 ```
 
 4. Open in browser http://<your_server_ip> <br>
