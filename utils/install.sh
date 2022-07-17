@@ -1,24 +1,48 @@
 #!/bin/bash
 
-NC="\033[0m"    # no color
-BLUE="\33[34m"  # blue
-
 function print {
-  echo -e "${BLUE}==============================${NC}"
-  echo -e "${BLUE}$1${NC}"
-  echo -e "${BLUE}==============================${NC}"
+  echo -e "\033[34m==============================\033[0m"
+  echo -e "\033[34m$1\033[0m"
+  echo -e "\033[34m==============================\033[0m"
 }
 
-bash <(curl -s https://raw.githubusercontent.com/vbloher/bash-tools/main/logo2.sh)
+function printError {
+  echo -e "\033[34m==============================\033[0m"
+  echo -e "\033[31m$1\033[0m"
+  echo -e "\033[34m==============================\033[0m"
+}
 
-# check dependencies and install docker
-DOCKER_PKG="docker-ce"
-DOCKER_OK=$(dpkg-query -W --showformat='${Status}\n' $DOCKER_PKG|grep "install ok installed")
-COMPOSE_PKG="docker-compose-plugin"
-COMPOSE_OK=$(dpkg-query -W --showformat='${Status}\n' $COMPOSE_PKG|grep "install ok installed")
-if [ "" = "$DOCKER_OK" ] || [ "" = "$COMPOSE_OK" ]; then
-  print "Installing docker with compose"
-  bash <(curl -s https://raw.githubusercontent.com/vbloher/monitoring-tool/main/utils/install_docker.sh)
+function printLogo {
+  bash <(curl -s https://raw.githubusercontent.com/vbloher/bash-tools/main/logo2.sh)
+}
+
+function installDependencies {
+  local pkgs=("docker-ce" "docker-ce-cli" "containerd.io" "docker-compose-plugin")
+
+  for pkg in "${pkgs[@]}"; do
+    # shellcheck disable=SC2155
+    local pkg_installed=$(dpkg-query -W --showformat='${Status}\n' $pkg|grep "install ok installed")
+    if [ "" = "$pkg_installed" ]; then
+      print "Installing docker with compose"
+      bash <(curl -s https://raw.githubusercontent.com/vbloher/monitoring-tool/main/utils/install_docker.sh)
+      break
+    fi
+  done
+
+  git_installed=$(dpkg-query -W --showformat='${Status}\n' git|grep "install ok installed")
+  if [ "" = "$git_installed" ]; then
+    print "Installing git"
+    sudo apt install -y git
+  fi
+}
+
+printLogo
+
+installDependencies
+
+if [ -d "$HOME/monitoring-tool" ]; then
+  printError "Directory ${HOME}/monitoring-tool already exist. Exiting..."
+  exit 1
 fi
 
 print "Installing monitoring-tool"
@@ -36,4 +60,4 @@ cp alertmanager/config.yml.example alertmanager/config.yml
 print "Starting monitoring-tool"
 sudo docker compose up -d
 
-print "Success! Open in your browser http://$(wget -qO- eth0.me)"
+print "Success! Open in your browser http://$(curl -s eth0.me); default credentials: admin\admin"
