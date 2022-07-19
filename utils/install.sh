@@ -21,7 +21,7 @@ function installDependencies {
 
   for pkg in "${pkgs[@]}"; do
     # shellcheck disable=SC2155
-    local pkg_installed=$(dpkg-query -W --showformat='${Status}\n' $pkg|grep "install ok installed")
+    local pkg_installed=$(dpkg-query -W --showformat='${Status}\n' $pkg 2>/dev/null|grep "install ok installed")
     if [ "" = "$pkg_installed" ]; then
       print "Installing docker with compose"
       bash <(curl -s https://raw.githubusercontent.com/vbloher/monitoring-tool/main/utils/install_docker.sh)
