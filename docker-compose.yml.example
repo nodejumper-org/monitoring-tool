@@ -5,8 +5,10 @@ networks:
     driver: bridge
     
 volumes:
-  prometheus_data: {}
-  grafana_data: {}
+  prometheus_data:
+  grafana_data:
+  caddy_data:
+  caddy_config:
 
 services:
   node-exporter:
@@ -65,17 +67,26 @@ services:
     container_name: grafana
     image: grafana/grafana:latest
     restart: unless-stopped
-#    environment:
-#      - GF_SERVER_PROTOCOL=https
-#      - GF_SERVER_CERT_FILE=/etc/grafana/ssl/fullchain.pem
-#      - GF_SERVER_CERT_KEY=/etc/grafana/ssl/privkey.pem
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
-#      - /opt/ssl:/etc/grafana/ssl
     ports:
-      - 80:3000
+      - 3000:3000
     networks:
       - monitoring
     depends_on:
       - prometheus
+
+#  reverse-proxy:
+#    container_name: caddy
+#    image: caddy/caddy:2-alpine
+#    restart: unless-stopped
+#    volumes:
+#      - caddy_data:/data
+#      - caddy_config:/config
+#      - ./Caddyfile:/etc/caddy/Caddyfile
+#    ports:
+#      - 80:80
+#      - 443:443
+#    networks:
+#      - monitoring
