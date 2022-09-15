@@ -101,7 +101,7 @@ Just run next command
 ```
 bash <(curl https://raw.githubusercontent.com/vbloher/monitoring-tool/main/utils/install_node_exporter.sh)
 ```
-### SSL
+## SSL
 If you would like to set up SLL then use the following instruction <br>
 Open docker-compose file in text editor and uncomment a part with Caddy service
 ```
