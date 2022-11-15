@@ -13,7 +13,7 @@ function printError {
 }
 
 function printLogo {
-  bash <(curl -s https://raw.githubusercontent.com/vbloher/bash-tools/main/logo2.sh)
+  bash <(curl -s https://raw.githubusercontent.com/nodejumper-org/cosmos-utils/main/utils/logo.sh)
 }
 
 function installDependencies {
@@ -24,7 +24,7 @@ function installDependencies {
     local pkg_installed=$(dpkg-query -W --showformat='${Status}\n' $pkg 2>/dev/null|grep "install ok installed")
     if [ "" = "$pkg_installed" ]; then
       print "Installing docker with compose"
-      bash <(curl -s https://raw.githubusercontent.com/vbloher/monitoring-tool/main/utils/install_docker.sh)
+      bash <(curl -s https://raw.githubusercontent.com/nodejumper-org/monitoring-tool/main/utils/install_docker.sh)
       break
     fi
   done
@@ -49,7 +49,7 @@ print "Installing monitoring-tool"
 
 # clone the repo
 cd "$HOME" || return
-git clone https://github.com/vbloher/monitoring-tool.git
+git clone https://github.com/nodejumper-org/monitoring-tool.git
 
 # create config files
 cd monitoring-tool || return

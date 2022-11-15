@@ -31,19 +31,19 @@
 ## How to run
 ### Automatic installation
 ```
-bash <(curl -s https://raw.githubusercontent.com/vbloher/monitoring-tool/main/utils/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/nodejumper-org/monitoring-tool/main/utils/install.sh)
 ```
 
 ### Manual installation
 1. Install docker
 ```
-bash <(curl -s https://raw.githubusercontent.com/vbloher/monitoring-tool/main/utils/install_docker.sh)
+bash <(curl -s https://raw.githubusercontent.com/nodejumper-org/monitoring-tool/main/utils/install_docker.sh)
 ```
 
 2. Clone the repo
 ```
 cd ~
-git clone https://github.com/vbloher/monitoring-tool.git 
+git clone https://github.com/nodejumper-org/monitoring-tool.git 
 ```
 
 3. Create configuration files from examples
@@ -99,7 +99,7 @@ bot_token=11111111:AAG_XXXXXXX  # your telegram bot token
 ## How to install node_exporter
 Just run next command 
 ```
-bash <(curl https://raw.githubusercontent.com/vbloher/monitoring-tool/main/utils/install_node_exporter.sh)
+bash <(curl https://raw.githubusercontent.com/nodejumper-org/monitoring-tool/main/utils/install_node_exporter.sh)
 ```
 ## SSL
 If you would like to set up SLL then use the following instruction <br>
