@@ -4,7 +4,7 @@ groups:
 
   - alert: HostDown
     expr: up == 0
-    for: 3m
+    for: 5m
     labels:
       severity: major
     annotations:
@@ -12,7 +12,7 @@ groups:
 
   - alert: HostOutOfMemory
     expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 10
-    for: 2m
+    for: 5m
     labels:
       severity: warning
     annotations:
