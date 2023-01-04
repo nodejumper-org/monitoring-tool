@@ -1,6 +1,6 @@
 # monitoring-tool
 
-> A powerful and easy-to-use monitoring tool for server hardware and validator nodes with alerts via telegram bot
+> A powerful and easy-to-use monitoring tool for server hardware and validator nodes with alerts via telegram bot and grafana dashboards
 
 ## Includes
 
