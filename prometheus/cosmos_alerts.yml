@@ -11,12 +11,12 @@ groups:
       description: "Validator missing blocks (&gt;=10 in last 5 minutes)"
 
   - alert: ValidatorDegradedSyncing
-    expr: increase(tendermint_consensus_latest_block_height[5m]) < 20
-    for: 5m
+    expr: increase(tendermint_consensus_latest_block_height{skip_sync_alert!="true"}[10m]) < 20
+    for: 1m
     labels:
       severity: major
     annotations:
-      description: "Degraded syncing performance (less than 20 blocks in the last 5 min)"
+      description: "Degraded syncing performance (less than 20 blocks in the last 10 min)"
 
   - alert: ValidatorTooFewPeers
     expr: tendermint_p2p_peers < 3
@@ -24,4 +24,4 @@ groups:
     labels:
       severity: major
     annotations:
-      description: "Number of peers is lower than threshold (&lt;3)"
+      description: "Number of peers is lower than threshold (3)"
