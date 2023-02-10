@@ -16,7 +16,7 @@ groups:
     labels:
       severity: warning
     annotations:
-      description: "Host memory is filling up (&lt;10% left)"
+      description: "Host memory is filling up (<10% left)"
 
   - alert: HostOutOfDiskSpace
     expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
@@ -24,7 +24,7 @@ groups:
     labels:
       severity: warning
     annotations:
-      description: "Disk is almost full (&lt;10% left)"
+      description: "Disk is almost full (<10% left)"
 
   - alert: HostOutOfDiskSpaceWithin24H
     expr: predict_linear(node_filesystem_files_free{fstype!~"rootfs|nfs4|tmpfs"}[4h], 24 * 3600) < 0
@@ -40,4 +40,4 @@ groups:
     labels:
       severity: warning
     annotations:
-      description: "High CPU load (&gt;85%)"
+      description: "High CPU load (>85%)"
