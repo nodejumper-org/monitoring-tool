@@ -12,7 +12,7 @@ groups:
 
   - alert: ValidatorDegradedSyncing
     expr: increase(tendermint_consensus_latest_block_height{skip_sync_alert!="true"}[10m]) < 20
-    for: 1m
+    for: 10m
     labels:
       severity: major
     annotations:
