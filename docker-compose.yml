@@ -106,7 +106,7 @@ services:
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
     environment:
-      - SERVER_IP=${$SERVER_IP}
+      - SERVER_IP=${SERVER_IP}
       - DOMAIN_NAME=${DOMAIN_NAME}
       - PROMETHEUS_USERNAME=${PROMETHEUS_USERNAME}
       - PROMETHEUS_PASSWORD=${PROMETHEUS_PASSWORD}
