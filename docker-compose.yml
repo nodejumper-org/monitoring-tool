@@ -47,7 +47,7 @@ services:
 
   alertmanager:
     container_name: alertmanager
-    image: prom/alertmanager:latest
+    build: ./alertmanager
     restart: unless-stopped
     volumes:
       - ./alertmanager/:/etc/alertmanager/
