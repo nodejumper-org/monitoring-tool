@@ -1,8 +1,6 @@
-# my global config
 global:
-  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-  # scrape_timeout is set to the global default (10s).
+  scrape_interval: 15s      # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s  # Evaluate rules every 15 seconds. The default is every 1 minute.
 
 # Alertmanager configuration
 alerting:
@@ -44,12 +42,12 @@ scrape_configs:
   ## for cosmos-based validator node with node_exporter installed and prometheus enabled
   #- job_name: "cosmos-validator"
   #  static_configs:
-  #  - targets: ["192.0.0.1:9100","192.0.0.1:26660"]
+  #  - targets: ["192.0.0.1:26660"]
   #    labels:
-  #      instance: "sentry1"
-  #  - targets: ["192.0.0.2:9100","192.0.0.2:26660"]
+  #      instance: "node1"
+  #  - targets: ["192.0.0.2:26660"]
   #    labels:
-  #      instance: "sentry2"
-  #  - targets: ["192.0.0.3:9100","192.0.0.3:26660"]
+  #      instance: "node2"
+  #  - targets: ["192.0.0.3:26660"]
   #    labels:
-  #      instance: "validator"
+  #      instance: "node3"

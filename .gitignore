@@ -2,4 +2,4 @@
 .idea
 /prometheus/prometheus.yml
 /alertmanager/config.yml
-docker-compose.yml
+.env

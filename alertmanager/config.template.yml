@@ -1,0 +1,20 @@
+route:
+  group_wait: 1m
+  group_interval: 1m
+  repeat_interval: 1h
+  group_by: ['alertname', 'cluster', 'service']
+  receiver: default
+
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+receivers:
+  - name: 'default'
+    telegram_configs:
+      - api_url: https://api.telegram.org
+        parse_mode: 'HTML'
+        message: '{{ template 'telegram.default' .}}'
+        chat_id: '${TELEGRAM_CHAT_ID}'
+        bot_token: '${TELEGRAM_BOT_TOKEN}'
+    webhook_configs:
+      - url: 'http://alerta-web:8080/api/webhooks/prometheus?api-key=c07ba4b7-7b4e-4f6d-9739-794cbae1ca00'
