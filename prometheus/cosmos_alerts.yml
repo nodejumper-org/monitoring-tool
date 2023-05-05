@@ -3,12 +3,12 @@ groups:
   rules:
 
   - alert: ValidatorMissingBlocks
-    expr: rate(tendermint_consensus_validator_missed_blocks[5m]) > 10
-    for: 1m
+    expr: increase(tendermint_consensus_validator_missed_blocks[5m]) > 50
+    for: 5m
     labels:
       severity: major
     annotations:
-      description: "Validator missing blocks (>=10 in last 5 minutes)"
+      description: "Validator missing blocks (>=50 in last 5 minutes)"
 
   - alert: ValidatorDegradedSyncing
     expr: increase(tendermint_consensus_latest_block_height{skip_sync_alert!="true"}[10m]) < 20
@@ -27,7 +27,7 @@ groups:
       description: "Number of peers is lower than threshold (<3)"
 
   - alert: MissingBlocks
-    expr: increase(cosmos_validator_missed_blocks[5m]) > 10
+    expr: increase(cosmos_validator_missed_blocks[5m]) > 50
     for: 5m
     labels:
       severity: major
