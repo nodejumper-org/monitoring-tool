@@ -3,7 +3,7 @@ groups:
   rules:
 
   - alert: ValidatorMissingBlocks
-    expr: increase(tendermint_consensus_validator_missed_blocks[5m]) > 10
+    expr: increase(tendermint_consensus_validator_missed_blocks{skip_missing_blocks_alert!="true"}[5m]) > 10
     for: 5m
     labels:
       severity: major
@@ -27,7 +27,7 @@ groups:
       description: "Number of peers is lower than threshold (<3)"
 
   - alert: MissingBlocks
-    expr: increase(cosmos_validator_missed_blocks{skip_sync_alert!="true"}[5m]) > 10
+    expr: increase(cosmos_validator_missed_blocks{skip_missing_blocks_alert!="true"}[5m]) > 10
     for: 5m
     labels:
       severity: major
