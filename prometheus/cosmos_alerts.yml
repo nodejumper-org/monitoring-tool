@@ -3,15 +3,39 @@ groups:
   rules:
 
   - alert: ValidatorMissingBlocks
-    expr: increase(tendermint_consensus_validator_missed_blocks{skip_missing_blocks_alert!="true"}[5m]) > 10
+    expr: increase(tendermint_consensus_validator_missed_blocks{skip_missing_blocks_alert!="true"}[10m]) > 200
     for: 5m
     labels:
       severity: major
     annotations:
-      description: "Validator missing blocks (>=10 in last 5 minutes)"
+      description: "Validator missing blocks ({{ $value }} in last 10 minutes)"
+
+  - alert: ValidatorMissingBlocksCometBft
+    expr: increase(cometbft_consensus_validator_missed_blocks{skip_missing_blocks_alert!="true"}[10m]) > 200
+    for: 5m
+    labels:
+      severity: major
+    annotations:
+      description: "Validator missing blocks ({{ $value }} in last 10 minutes)"
+
+  - alert: MissingBlocks
+    expr: increase(cosmos_validator_missed_blocks{skip_missing_blocks_alert!="true"}[10m]) > 200
+    for: 5m
+    labels:
+      severity: major
+    annotations:
+      description: 'Validator `{{ $labels.moniker }}` is missing `{{ $value }}` blocks!'
 
   - alert: ValidatorDegradedSyncing
     expr: increase(tendermint_consensus_latest_block_height{skip_sync_alert!="true"}[10m]) < 20
+    for: 10m
+    labels:
+      severity: major
+    annotations:
+      description: "Degraded syncing performance (less than 20 blocks in the last 10 min)"
+
+  - alert: ValidatorDegradedSyncingCometBft
+    expr: increase(cometbft_consensus_latest_block_height{skip_sync_alert!="true"}[10m]) < 20
     for: 10m
     labels:
       severity: major
@@ -24,15 +48,7 @@ groups:
     labels:
       severity: major
     annotations:
-      description: "Number of peers is lower than threshold (<3)"
-
-  - alert: MissingBlocks
-    expr: increase(cosmos_validator_missed_blocks{skip_missing_blocks_alert!="true"}[5m]) > 10
-    for: 5m
-    labels:
-      severity: major
-    annotations:
-      description: 'Validator `{{ $labels.moniker }}` is missing `{{ $value }}` blocks!'
+      description: "Number of peers is {{ $value }} and it is lower than threshold (<3)"
 
   - alert: LowInRank
     expr: cosmos_validator_rank > (count(cosmos_validators_active == 1) - 10)
