@@ -27,7 +27,7 @@ groups:
       description: 'Validator `{{ $labels.moniker }}` is missing `{{ $value }}` blocks!'
 
   - alert: DegradedSyncingTendermint
-    expr: delta(tendermint_consensus_latest_block_height{skip_sync_alert!="true"}[5m]) < 20
+    expr: increase(tendermint_consensus_height{skip_sync_alert!="true"}[5m]) < 20
     for: 1m
     labels:
       severity: major
@@ -35,7 +35,7 @@ groups:
       description: "Degraded syncing performance (less than 20 blocks in the last 5 min)"
 
   - alert: DegradedSyncingCometBft
-    expr: delta(cometbft_consensus_latest_block_height{skip_sync_alert!="true"}[5m]) < 20
+    expr: increase(cometbft_consensus_height{skip_sync_alert!="true"}[5m]) < 20
     for: 1m
     labels:
       severity: major
