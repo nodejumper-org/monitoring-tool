@@ -28,17 +28,17 @@ groups:
 
   - alert: DegradedSyncingTendermint
     expr: increase(tendermint_consensus_height{skip_sync_alert!="true"}[5m]) < 20
-    for: 1m
+    for: 10m
     labels:
-      severity: major
+      severity: warning
     annotations:
       description: "Degraded syncing performance (less than 20 blocks in the last 5 min)"
 
   - alert: DegradedSyncingCometBft
     expr: increase(cometbft_consensus_height{skip_sync_alert!="true"}[5m]) < 20
-    for: 1m
+    for: 10m
     labels:
-      severity: major
+      severity: warning
     annotations:
       description: "Degraded syncing performance (less than 20 blocks in the last 5 min)"
 
@@ -46,7 +46,7 @@ groups:
     expr: tendermint_p2p_peers < 3
     for: 10m
     labels:
-      severity: major
+      severity: info
     annotations:
       description: "Number of peers is {{ $value }} and it is lower than threshold (<3)"
 
@@ -54,7 +54,7 @@ groups:
     expr: delta(cosmos_validator_rank[5m]) < 0
     for: 1m
     labels:
-      severity: major
+      severity: info
     annotations:
       description: 'Your validator `{{ $labels.moniker }}` rank is `{{ $value }}`!'
 
@@ -62,7 +62,7 @@ groups:
     expr: delta(cosmos_validator_rank[5m]) > 0
     for: 1m
     labels:
-      severity: major
+      severity: info
     annotations:
       description: 'Your validator `{{ $labels.moniker }}` rank is `{{ $value }}`!'
 
@@ -78,6 +78,6 @@ groups:
     expr: changes(cosmos_validator_active[5m]) > 0
     for: 5m
     labels:
-      severity: major
+      severity: warning
     annotations:
       description: 'Your validator `{{ $labels.moniker }}` changed the status'
