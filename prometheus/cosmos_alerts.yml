@@ -4,7 +4,7 @@ groups:
 
   - alert: MissingBlocksTendermint
     expr: delta(tendermint_consensus_validator_missed_blocks{skip_missing_blocks_alert!="true"}[5m]) > 20
-    for: 1m
+    for: 5m
     labels:
       severity: major
     annotations:
@@ -12,7 +12,7 @@ groups:
 
   - alert: MissingBlocksCometBft
     expr: delta(cometbft_consensus_validator_missed_blocks{skip_missing_blocks_alert!="true"}[5m]) > 20
-    for: 1m
+    for: 5m
     labels:
       severity: major
     annotations:
@@ -20,7 +20,7 @@ groups:
 
   - alert: MissingBlocksCosmos
     expr: delta(cosmos_validator_missed_blocks{skip_missing_blocks_alert!="true"}[5m]) > 20
-    for: 1m
+    for: 5m
     labels:
       severity: major
     annotations:
@@ -44,7 +44,7 @@ groups:
 
   - alert: ValidatorTooFewPeers
     expr: tendermint_p2p_peers < 3
-    for: 10m
+    for: 15m
     labels:
       severity: info
     annotations:
@@ -52,7 +52,7 @@ groups:
 
   - alert: RankDecrease
     expr: delta(cosmos_validator_rank[5m]) < 0
-    for: 1m
+    for: 5m
     labels:
       severity: info
     annotations:
@@ -60,7 +60,7 @@ groups:
 
   - alert: RankIncrease
     expr: delta(cosmos_validator_rank[5m]) > 0
-    for: 1m
+    for: 5m
     labels:
       severity: info
     annotations:
@@ -68,7 +68,7 @@ groups:
 
   - alert: IsJailed
     expr: cosmos_validator_jailed == 1
-    for: 5m
+    for: 1m
     labels:
       severity: major
     annotations:
