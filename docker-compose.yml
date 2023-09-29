@@ -46,7 +46,7 @@ services:
 
   alertmanager:
     container_name: alertmanager
-    build: ./alertmanager
+    image: prom/alertmanager:latest
     restart: unless-stopped
     volumes:
       - ./alertmanager/:/etc/alertmanager/
@@ -79,8 +79,6 @@ services:
     environment:
       - SERVER_IP=${SERVER_IP}
       - DOMAIN_NAME=${DOMAIN_NAME}
-      - PROMETHEUS_USERNAME=${PROMETHEUS_USERNAME}
-      - PROMETHEUS_PASSWORD=${PROMETHEUS_PASSWORD}
     ports:
       - 80:80
       - 443:443

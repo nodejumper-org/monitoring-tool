@@ -1,11 +1,3 @@
 {$SERVER_IP}, {$DOMAIN_NAME} {
     reverse_proxy grafana:3000
-
-    route /prometheus/* {
-        uri strip_prefix /prometheus
-        reverse_proxy prometheus:9090
-        basicauth {
-          {$PROMETHEUS_USERNAME} {$PROMETHEUS_PASSWORD}
-        }
-    }
 }
