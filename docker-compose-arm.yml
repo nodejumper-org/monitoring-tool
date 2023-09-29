@@ -1,0 +1,90 @@
+version: '3.9'
+
+volumes:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  monitoring:
+
+services:
+  node_exporter:
+    container_name: node_exporter
+    image: prom/node-exporter-linux-arm64:latest
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    expose:
+      - 9100
+    networks:
+      - monitoring
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus-linux-arm64:latest
+    restart: unless-stopped
+    volumes:
+      - prometheus_data:/prometheus
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/server_alerts.yml:/etc/prometheus/server_alerts.yml
+      - ./prometheus/cosmos_alerts.yml:/etc/prometheus/cosmos_alerts.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+    expose:
+      - 9090
+    networks:
+      - monitoring
+
+  alertmanager:
+    container_name: alertmanager
+    build:
+      context: ./alertmanager
+      dockerfile: Dockerfile-arm64
+    restart: unless-stopped
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+    expose:
+      - 9093
+    networks:
+      - monitoring
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana-arm64v8-linux:latest
+    restart: unless-stopped
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    ports:
+      - 3000:3000
+    networks:
+      - monitoring
+
+  caddy:
+    container_name: caddy
+    image: arm64v8/caddy:latest
+    restart: unless-stopped
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+    environment:
+      - SERVER_IP=${SERVER_IP}
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - PROMETHEUS_USERNAME=${PROMETHEUS_USERNAME}
+      - PROMETHEUS_PASSWORD=${PROMETHEUS_PASSWORD}
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - monitoring
