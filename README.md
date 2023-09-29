@@ -25,8 +25,8 @@
 
 #### Cosmos-based validator node alerts
 - Missing blocks
-- Degraded syncing (sync less than 40 blocks in last 5 min)
-- Low peers count (<5)
+- Degraded syncing (sync less than 20 blocks in last 5 min)
+- Low peers count (<3)
 
 ## How to run
 ### Automatic installation
@@ -49,18 +49,18 @@ git clone https://github.com/nodejumper-org/monitoring-tool.git
 3. Create configuration files from examples
 ```
 cd monitoring-tool
-cp docker-compose.yml.example docker-compose.yml
+cp .env.example .env
 cp prometheus/prometheus.yml.example prometheus/prometheus.yml
-cp alertmanager/config.yml.example alertmanager/config.yml
-cp Caddyfile.example Caddyfile
 ```
 
-4. Start containers
+4. Edit `.env` and `prometheus/prometheus.yml` config files
+
+5. Start containers
 ```
 sudo docker compose up -d
 ```
 
-4. Open in browser http://<your_server_ip>:3000 <br>
+6. Open in browser http://<your_server_ip>:3000 or http://<your_domain_name> <br>
 default credentials: admin/admin
 
 ## How to configure
@@ -101,30 +101,6 @@ Just run next command
 ```
 bash <(curl https://raw.githubusercontent.com/nodejumper-org/monitoring-tool/main/utils/install_node_exporter.sh)
 ```
-## SSL
-If you would like to set up SSL then use the following instruction <br>
-Open docker-compose file in text editor and uncomment a part with Caddy service
-```
-  reverse-proxy:
-    container_name: caddy
-    image: caddy/caddy:2-alpine
-    restart: unless-stopped
-    volumes:
-      - caddy_data:/data
-      - caddy_config:/config
-      - ./Caddyfile:/etc/caddy/Caddyfile
-    ports:
-      - 80:80
-      - 443:443
-    networks:
-      - monitoring
-```
-Second step - replace `example.domain.com` with your domain name in Caddyfile:
-```
-example.domain.com {
-	reverse_proxy grafana:3000
-}
-```
 
 ## How to update
 Just run next commands 
@@ -132,6 +108,6 @@ Just run next commands
 cd monitoring-tool
 sudo docker-compose down
 git pull
-sudo docker-compose pull
-sudo docker-compose up -d
+sudo docker compose pull
+sudo docker compose up -d
 ```
