@@ -8,9 +8,4 @@
           {$PROMETHEUS_USERNAME} {$PROMETHEUS_PASSWORD}
         }
     }
-
-    route /alerta/* {
-        uri strip_prefix /alerta
-        reverse_proxy alerta_web:8080
-    }
 }

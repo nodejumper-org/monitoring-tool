@@ -1,9 +1,8 @@
 version: '3.9'
-    
+
 volumes:
   prometheus_data:
   grafana_data:
-  alerta_db:
 
 networks:
   monitoring:
@@ -58,36 +57,6 @@ services:
       - 9093
     networks:
       - monitoring
-
-  alerta_db:
-    container_name: alerta_db
-    image: postgres:13
-    restart: unless-stopped
-    volumes:
-      - alerta_db:/var/lib/postgresql/data
-      - ./alerta/alerta-init.sql:/docker-entrypoint-initdb.d/alerta-init.sql
-    environment:
-      POSTGRES_DB: monitoring
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-    expose:
-      - 5432
-    networks:
-      - monitoring
-
-  alerta_web:
-    container_name: alerta_web
-    image: alerta/alerta-web:latest
-    restart: unless-stopped
-    environment:
-      - DATABASE_URL=postgres://admin:admin@alerta_db:5432/monitoring
-      - PLUGINS=reject,blackout
-    expose:
-      - 8080
-    networks:
-      - monitoring
-    depends_on:
-      - alerta_db
 
   grafana:
     container_name: grafana
