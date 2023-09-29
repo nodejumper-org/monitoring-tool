@@ -50,10 +50,18 @@ git clone https://github.com/nodejumper-org/monitoring-tool.git
 ```
 cd monitoring-tool
 cp .env.example .env
+cp alertmanager/config.example.yml alertmanager/config.yml
 cp prometheus/prometheus.example.yml prometheus/prometheus.yml
 ```
 
-4. Edit `.env` and `prometheus/prometheus.yml` config files
+4. Edit `.env`, `prometheus/prometheus.yml`, `alertmanager/config.yml` config files
+
+#### Telegram notifications
+In order to enable telegram notifications, create your own bot and fill in the following fields in the file `alertmanager/config.yml`
+```
+chat_id=1111111                 # your telegram user id
+bot_token=11111111:AAG_XXXXXXX  # your telegram bot token
+```
 
 5. Start containers
 ```
@@ -90,12 +98,7 @@ Add your servers with installed [node_exporter](https://github.com/prometheus/no
       labels:
         instance: "validator"
 ```
-### Telegram notifications
-In order to enable telegram notifications, create your own bot and fill in the following fields in the file <b>alertmanager/config.yml</b>
-```
-chat_id=1111111                 # your telegram user id
-bot_token=11111111:AAG_XXXXXXX  # your telegram bot token
-```
+
 ## How to install node_exporter
 Just run next command 
 ```
