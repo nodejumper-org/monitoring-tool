@@ -50,7 +50,7 @@ git clone https://github.com/nodejumper-org/monitoring-tool.git
 ```
 cd monitoring-tool
 cp .env.example .env
-cp prometheus/prometheus.yml.example prometheus/prometheus.yml
+cp prometheus/prometheus.example.yml prometheus/prometheus.yml
 ```
 
 4. Edit `.env` and `prometheus/prometheus.yml` config files
