@@ -1,59 +1,83 @@
 groups:
-- name: Cosmos Alerts  
+- name: Cosmos Alerts
   rules:
 
-  - alert: ValidatorMissingBlocks
-    expr: increase(tendermint_consensus_validator_missed_blocks[5m]) > 50
+  - alert: MissingBlocksTendermint
+    expr: delta(tendermint_consensus_validator_missed_blocks{skip_missing_blocks_alert!="true"}[5m]) > 20
     for: 5m
     labels:
       severity: major
     annotations:
-      description: "Validator missing blocks (>=50 in last 5 minutes)"
+      description: "Validator missing blocks ({{ $value }} in last 10 minutes)"
 
-  - alert: ValidatorDegradedSyncing
-    expr: increase(tendermint_consensus_latest_block_height{skip_sync_alert!="true"}[10m]) < 20
-    for: 10m
-    labels:
-      severity: major
-    annotations:
-      description: "Degraded syncing performance (less than 20 blocks in the last 10 min)"
-
-  - alert: ValidatorTooFewPeers
-    expr: tendermint_p2p_peers < 3
+  - alert: MissingBlocksCometBft
+    expr: delta(cometbft_consensus_validator_missed_blocks{skip_missing_blocks_alert!="true"}[5m]) > 20
     for: 5m
     labels:
       severity: major
     annotations:
-      description: "Number of peers is lower than threshold (<3)"
+      description: "Validator missing blocks ({{ $value }} in last 10 minutes)"
 
-  - alert: MissingBlocks
-    expr: increase(cosmos_validator_missed_blocks[5m]) > 50
+  - alert: MissingBlocksCosmos
+    expr: delta(cosmos_validator_missed_blocks{skip_missing_blocks_alert!="true"}[5m]) > 20
     for: 5m
     labels:
       severity: major
     annotations:
       description: 'Validator `{{ $labels.moniker }}` is missing `{{ $value }}` blocks!'
 
-  - alert: LowInRank
-    expr: cosmos_validator_rank > (count(cosmos_validators_active == 1) - 10)
+  - alert: DegradedSyncingTendermint
+    expr: increase(tendermint_consensus_height{skip_sync_alert!="true"}[5m]) < 20
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      description: "Degraded syncing performance (less than 20 blocks in the last 5 min)"
+
+  - alert: DegradedSyncingCometBft
+    expr: increase(cometbft_consensus_height{skip_sync_alert!="true"}[5m]) < 20
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      description: "Degraded syncing performance (less than 20 blocks in the last 5 min)"
+
+  - alert: ValidatorTooFewPeers
+    expr: tendermint_p2p_peers < 3
+    for: 15m
+    labels:
+      severity: info
+    annotations:
+      description: "Number of peers is {{ $value }} and it is lower than threshold (<3)"
+
+  - alert: RankDecrease
+    expr: delta(cosmos_validator_rank[5m]) < 0
     for: 5m
     labels:
-      severity: major
+      severity: info
     annotations:
       description: 'Your validator `{{ $labels.moniker }}` rank is `{{ $value }}`!'
 
-  - alert: UpInRank
-    expr: cosmos_validator_rank > (count(cosmos_validators_active == 1) + 10)
+  - alert: RankIncrease
+    expr: delta(cosmos_validator_rank[5m]) > 0
     for: 5m
     labels:
-      severity: major
+      severity: info
     annotations:
       description: 'Your validator `{{ $labels.moniker }}` rank is `{{ $value }}`!'
 
   - alert: IsJailed
     expr: cosmos_validator_jailed == 1
-    for: 5m
+    for: 1m
     labels:
       severity: major
     annotations:
-      description: 'Your validator `{{ $labels.moniker }}` is jailed! `{{ $value }}`!'
+      description: 'Your validator `{{ $labels.moniker }}` is jailed!'
+
+  - alert: ActiveStatusChanged
+    expr: changes(cosmos_validator_active[5m]) > 0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      description: 'Your validator `{{ $labels.moniker }}` changed the status'
