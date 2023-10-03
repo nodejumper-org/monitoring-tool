@@ -3,10 +3,8 @@
 # Determine the architecture
 if [[ "$(uname -m)" == "x86_64" ]]; then
   ARCH="amd64"
-elif [[ "$(uname -m)" == "armv7l" ]]; then
-  ARCH="armv7"
 elif [[ "$(uname -m)" == "aarch64" ]]; then
-  ARCH="armv64"
+  ARCH="arm64"
 else
   echo "Unsupported architecture"
   exit 1
@@ -22,7 +20,7 @@ else
   exit 1
 fi
 
-VERSION=$(curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep tag_name | cut -d '"' -f 4)
+VERSION=$(curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")' | sed 's/v//')
 URL="https://github.com/prometheus/node_exporter/releases/latest/download/node_exporter-$VERSION.$OS-$ARCH.tar.gz"
 
 # Create a temporary directory for downloading and installation
@@ -60,3 +58,4 @@ sudo systemctl start node_exporter
 rm -rf "$TMP_DIR"
 
 echo "Node Exporter version $VERSION successfully installed and started."
+echo "To check the logs, use the command 'sudo journalctl -u node_exporter -f'"
