@@ -53,7 +53,6 @@ git clone https://github.com/nodejumper-org/monitoring-tool.git
 
 # create config files
 cd monitoring-tool || return
-cp docker-compose.yml.example docker-compose.yml
 cp prometheus/prometheus.yml.example prometheus/prometheus.yml
 cp alertmanager/config.yml.example alertmanager/config.yml
 

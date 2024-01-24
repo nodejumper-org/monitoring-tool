@@ -76,17 +76,3 @@ services:
       - monitoring
     depends_on:
       - prometheus
-
-#  reverse-proxy:
-#    container_name: caddy
-#    image: caddy/caddy:2-alpine
-#    restart: unless-stopped
-#    volumes:
-#      - caddy_data:/data
-#      - caddy_config:/config
-#      - ./Caddyfile:/etc/caddy/Caddyfile
-#    ports:
-#      - 80:80
-#      - 443:443
-#    networks:
-#      - monitoring

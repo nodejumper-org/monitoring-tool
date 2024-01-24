@@ -85,7 +85,7 @@
             {
                "datasource": "Prometheus",
                "exemplar": false,
-               "expr": "tendermint_consensus_height{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_height{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "instant": true,
                "interval": "30s",
                "legendFormat": "",
@@ -142,7 +142,7 @@
          "targets": [
             {
                "datasource": "Prometheus",
-               "expr": "tendermint_consensus_total_txs{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_total_txs{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "format": "time_series",
                "instant": false,
                "interval": "30s",
@@ -210,7 +210,7 @@
             {
                "datasource": "Prometheus",
                "exemplar": false,
-               "expr": "tendermint_consensus_height{chain_id=\"$chain_id\", instance=\"$instance\"} - on()  tendermint_consensus_validator_last_signed_height{chain_id=\"$chain_id\", instance=\"$instance\"} -1",
+               "expr": "cometbft_consensus_height{chain_id=\"$chain_id\", instance=\"$instance\"} - on()  cometbft_consensus_validator_last_signed_height{chain_id=\"$chain_id\", instance=\"$instance\"} -1",
                "format": "time_series",
                "hide": false,
                "instant": true,
@@ -272,7 +272,7 @@
             {
                "datasource": "Prometheus",
                "exemplar": false,
-               "expr": "increase(tendermint_consensus_validator_missed_blocks{chain_id=\"$chain_id\", instance=\"$instance\"}[1h])",
+               "expr": "increase(cometbft_consensus_validator_missed_blocks{chain_id=\"$chain_id\", instance=\"$instance\"}[1h])",
                "instant": true,
                "interval": "30s",
                "legendFormat": "",
@@ -341,7 +341,7 @@
          "targets": [
             {
                "datasource": "Prometheus",
-               "expr": "tendermint_p2p_peers{chain_id=\"$chain_id\", instance=~\"$instance\"}",
+               "expr": "cometbft_p2p_peers{chain_id=\"$chain_id\", instance=~\"$instance\"}",
                "format": "time_series",
                "instant": false,
                "interval": "30s",
@@ -404,7 +404,7 @@
             {
                "datasource": "Prometheus",
                "exemplar": true,
-               "expr": "tendermint_consensus_block_size_bytes{chain_id=\"$chain_id\",instance=\"$instance\"}",
+               "expr": "cometbft_consensus_block_size_bytes{chain_id=\"$chain_id\",instance=\"$instance\"}",
                "format": "time_series",
                "instant": false,
                "interval": "30s",
@@ -463,7 +463,7 @@
             {
                "datasource": "Prometheus",
                "exemplar": true,
-               "expr": "tendermint_consensus_validators{chain_id=\"$chain_id\",instance=\"$instance\"}",
+               "expr": "cometbft_consensus_validators{chain_id=\"$chain_id\",instance=\"$instance\"}",
                "format": "time_series",
                "instant": false,
                "interval": "30s",
@@ -534,7 +534,7 @@
          "targets": [
             {
                "datasource": "Prometheus",
-               "expr": "tendermint_mempool_size{chain_id=\"$chain_id\", instance=~\"$instance\"}",
+               "expr": "cometbft_mempool_size{chain_id=\"$chain_id\", instance=~\"$instance\"}",
                "format": "time_series",
                "instant": false,
                "interval": "30s",
@@ -590,7 +590,7 @@
             {
                "datasource": "Prometheus",
                "exemplar": false,
-               "expr": "tendermint_consensus_validator_power{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_validator_power{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "instant": true,
                "interval": "30s",
                "legendFormat": "",
@@ -651,7 +651,7 @@
             {
                "datasource": "Prometheus",
                "exemplar": true,
-               "expr": "tendermint_consensus_height{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_height{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "instant": false,
                "interval": "30s",
                "legendFormat": "",
@@ -748,7 +748,7 @@
             {
                "datasource": "Prometheus",
                "exemplar": true,
-               "expr": "tendermint_consensus_validator_power{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_validator_power{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "interval": "",
                "intervalFactor": 1,
                "legendFormat": "Voting power",
@@ -847,7 +847,7 @@
             {
                "datasource": "Prometheus",
                "exemplar": true,
-               "expr": "tendermint_consensus_height{chain_id=\"$chain_id\", instance=\"$instance\"} - on() tendermint_consensus_validator_last_signed_height{chain_id=\"$chain_id\", instance=\"$instance\"} - 1",
+               "expr": "cometbft_consensus_height{chain_id=\"$chain_id\", instance=\"$instance\"} - on() cometbft_consensus_validator_last_signed_height{chain_id=\"$chain_id\", instance=\"$instance\"} - 1",
                "format": "time_series",
                "hide": false,
                "instant": false,
@@ -950,7 +950,7 @@
             {
                "datasource": "Prometheus",
                "exemplar": true,
-               "expr": "increase(tendermint_consensus_validator_missed_blocks{chain_id=\"$chain_id\", instance=\"$instance\"}[1h])",
+               "expr": "increase(cometbft_consensus_validator_missed_blocks{chain_id=\"$chain_id\", instance=\"$instance\"}[1h])",
                "interval": "",
                "intervalFactor": 1,
                "legendFormat": "Missed",
@@ -1066,7 +1066,7 @@
          "targets": [
             {
                "datasource": "Prometheus",
-               "expr": "tendermint_consensus_validators{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_validators{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "format": "time_series",
                "instant": false,
                "interval": "",
@@ -1076,7 +1076,7 @@
             },
             {
                "datasource": "Prometheus",
-               "expr": "tendermint_consensus_missing_validators{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_missing_validators{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "format": "time_series",
                "interval": "",
                "intervalFactor": 1,
@@ -1086,7 +1086,7 @@
             {
                "datasource": "Prometheus",
                "exemplar": true,
-               "expr": "tendermint_consensus_byzantine_validators{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_byzantine_validators{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "format": "time_series",
                "interval": "",
                "intervalFactor": 1,
@@ -1183,7 +1183,7 @@
          "targets": [
             {
                "datasource": "Prometheus",
-               "expr": "tendermint_consensus_validators_power{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_validators_power{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "format": "time_series",
                "instant": false,
                "interval": "",
@@ -1193,7 +1193,7 @@
             },
             {
                "datasource": "Prometheus",
-               "expr": "tendermint_consensus_missing_validators_power{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_missing_validators_power{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "format": "time_series",
                "interval": "",
                "intervalFactor": 1,
@@ -1202,7 +1202,7 @@
             },
             {
                "datasource": "Prometheus",
-               "expr": "tendermint_consensus_byzantine_validators_power{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_byzantine_validators_power{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "format": "time_series",
                "intervalFactor": 1,
                "legendFormat": "Byzantine",
@@ -1297,7 +1297,7 @@
          "targets": [
             {
                "datasource": "Prometheus",
-               "expr": "tendermint_consensus_block_size_bytes{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_block_size_bytes{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "format": "time_series",
                "instant": false,
                "interval": "",
@@ -1395,7 +1395,7 @@
          "targets": [
             {
                "datasource": "Prometheus",
-               "expr": "tendermint_consensus_num_txs{chain_id=\"$chain_id\", instance=\"$instance\"}",
+               "expr": "cometbft_consensus_num_txs{chain_id=\"$chain_id\", instance=\"$instance\"}",
                "format": "time_series",
                "instant": false,
                "interval": "",
@@ -1444,7 +1444,7 @@
    "tags": [
       "Blockchain",
       "Cosmos",
-      "Tendermint"
+      "CometBFT"
    ],
    "templating": {
       "list": [
@@ -1454,7 +1454,7 @@
                "text": "sifchain-1",
                "value": "sifchain-1"
             },
-            "definition": "label_values(tendermint_consensus_height, chain_id)",
+            "definition": "label_values(cometbft_consensus_height, chain_id)",
             "hide": 0,
             "includeAll": false,
             "label": "Chain ID",
@@ -1462,7 +1462,7 @@
             "name": "chain_id",
             "options": [],
             "query": {
-               "query": "label_values(tendermint_consensus_height, chain_id)",
+               "query": "label_values(cometbft_consensus_height, chain_id)",
                "refId": "Prometheus-chain_id-Variable-Query"
             },
             "refresh": 1,
@@ -1481,7 +1481,7 @@
                "text": "185.218.124.108:26660",
                "value": "185.218.124.108:26660"
             },
-            "definition": "label_values(tendermint_consensus_height{chain_id=\"$chain_id\"}, instance)",
+            "definition": "label_values(cometbft_consensus_height{chain_id=\"$chain_id\"}, instance)",
             "hide": 0,
             "includeAll": false,
             "label": "Instance",
@@ -1489,7 +1489,7 @@
             "name": "instance",
             "options": [],
             "query": {
-               "query": "label_values(tendermint_consensus_height{chain_id=\"$chain_id\"}, instance)",
+               "query": "label_values(cometbft_consensus_height{chain_id=\"$chain_id\"}, instance)",
                "refId": "Prometheus-instance-Variable-Query"
             },
             "refresh": 1,
@@ -1534,7 +1534,7 @@
       ]
    },
    "timezone": "",
-   "title": "Cosmos-based Chains Dashboard",
+   "title": "CosmosSDK Based Chains Dashboard",
    "uid": "UJyurCTWz",
    "version": 12,
    "weekStart": ""
