@@ -29,12 +29,6 @@
 - Low peers count (<5)
 
 ## How to run
-### Automatic installation
-```
-bash <(curl -s https://raw.githubusercontent.com/nodejumper-org/monitoring-tool/main/utils/install.sh)
-```
-
-### Manual installation
 1. Install docker
 ```
 bash <(curl -s https://raw.githubusercontent.com/nodejumper-org/monitoring-tool/main/utils/install_docker.sh)
@@ -58,12 +52,13 @@ cp alertmanager/config.yml.example alertmanager/config.yml
 sudo docker compose up -d
 ```
 
-4. Open in browser http://<your_server_ip>:3000 <br>
-default credentials: admin/admin
+4. Open in browser `http://<your_server_ip>:3000` <br>
+> default user: admin <br>
+> default password: admin
 
 ## How to configure
 ### Servers to monitor
-Add your servers with installed [node_exporter](https://github.com/prometheus/node_exporter) or installed cosmos-based node with enabled prometheus port to file <b>prometheus/prometheus.yml</b>
+Add your servers with installed [node_exporter](https://github.com/prometheus/node_exporter) or installed cosmos-based node with enabled prometheus port to file `prometheus/prometheus.yml`
 ```
   # example for servers with node_exporter installed
   - job_name: "my-servers"
@@ -80,13 +75,13 @@ Add your servers with installed [node_exporter](https://github.com/prometheus/no
     static_configs:
     - targets: ["192.0.0.1:9100","192.0.0.1:26660"]
       labels:
-        instance: "sentry1"
+        instance: "validator1"
     - targets: ["192.0.0.2:9100","192.0.0.2:26660"]
       labels:
-        instance: "sentry2"
+        instance: "validator2"
     - targets: ["192.0.0.3:9100","192.0.0.3:26660"]
       labels:
-        instance: "validator"
+        instance: "validator3"
 ```
 ### Telegram notifications
 In order to enable telegram notifications, create your own bot and fill in the following fields in the file <b>alertmanager/config.yml</b>
