@@ -5,8 +5,7 @@ sudo apt -q update
 sudo apt -qy install curl wget
 
 # Define the latest version of node_exporter
-VERSION=$(curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep 'tag_name' | cut -d\" -f4)
-
+VERSION=$(curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | grep 'tag_name' | cut -d\" -f4 | cut -c2-)
 # Determine the operating system
 if [[ "$(uname -s)" == "Linux" ]]; then
   OS="linux"
@@ -28,7 +27,7 @@ else
 fi
 
 # Download and install node_exporter
-wget https://github.com/prometheus/node_exporter/releases/download/${VERSION}/node_exporter-${VERSION}.${OS}-${ARCH}.tar.gz
+wget https://github.com/prometheus/node_exporter/releases/download/v${VERSION}/node_exporter-${VERSION}.${OS}-${ARCH}.tar.gz
 tar xvf node_exporter-${VERSION}.${OS}-${ARCH}.tar.gz
 rm node_exporter-${VERSION}.${OS}-${ARCH}.tar.gz
 sudo mv node_exporter-${VERSION}.${OS}-${ARCH} node_exporter
